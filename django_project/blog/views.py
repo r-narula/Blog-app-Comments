@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 from .models import Post,Comment
-from django.contrib.gis.geoip2 import GeoIP2
 from django.views.generic import ListView,DetailView,CreateView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .forms import CommentForm
