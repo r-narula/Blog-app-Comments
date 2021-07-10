@@ -1,0 +1,1 @@
+# just create views for all the things.. and forms .(30 mins work)

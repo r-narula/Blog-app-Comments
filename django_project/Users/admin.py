@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Profile
+from .models import (Profile,FormSubmit,UserMetaData,UserTotalHour)
 # Register your models here.
 
-admin.site.register(Profile)
+
+list_models = [Profile,FormSubmit,UserTotalHour,UserMetaData]
+admin.site.register(list_models)
