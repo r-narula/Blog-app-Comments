@@ -30,13 +30,12 @@ class ProfileUpdateForm(forms.ModelForm):
     def save(self):
         super().save()  # saving image first
 
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = FormSubmit
-        fields = ["task_choosen", "hours_spent", "others", "image"]
+        fields = ["task_chosen", "hours_spent", "others", "image"]
 
     def __init__(self, *args, user=None, **kwargs):
         print(user)
         super(CommentForm, self).__init__(*args, **kwargs)
-        self.fields['task_choosen'].queryset = Task.objects.filter(event=user.profile.event_chosen)
+        self.fields['task_chosen'].queryset = Task.objects.filter(event=user.profile.event_chosen)

@@ -1,16 +1,21 @@
 from django.shortcuts import render,redirect
 from .models import Post,Comment
-# from django.http import 404
+from django.contrib.gis.geoip2 import GeoIP2
 from django.views.generic import ListView,DetailView,CreateView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .forms import CommentForm
+from django.template import  RequestContext
 from django.contrib.auth.decorators import login_required
+from requests import get
+
+
 
 def home(request):
-    print([post.author for post in Post.objects.all()])
+
     context ={
         'posts':Post.objects.all()
     }
+
     return render(request,'blog/index.html',context=context)
 
 class PostListView(ListView):
@@ -45,7 +50,6 @@ def post_detail_view(request,pk):
             return redirect(f'/post/{pk}')
         else:
             print("fuck world")
-
     else:
         form = CommentForm()
 

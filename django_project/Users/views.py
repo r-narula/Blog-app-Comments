@@ -37,6 +37,7 @@ def profile(request):
         s_form = CommentForm(user=request.user)
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+        print(request.META.get("REMOTE_ADDR"),"==========================")
 
     context = {"u_form": u_form, "p_form": p_form, "s_form": s_form}
 
@@ -48,7 +49,7 @@ def comment(request):
         s_form = CommentForm(request.POST, user=request.user)
         if s_form.is_valid():
             comment = FormSubmit(
-                task_choosen=s_form.cleaned_data["task_choosen"],
+                task_chosen=s_form.cleaned_data["task_chosen"],
                 user_using=request.user,
                 others=s_form.cleaned_data["others"],
                 hours_spent=s_form.cleaned_data["hours_spent"],
