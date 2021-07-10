@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate
 from .models import FormSubmit, UserMetaData
 from django.http import HttpResponse
 from .models import UserMetaData, UserTotalHour
+import requests
+
 
 def register(request):
     if request.method == "POST":
@@ -21,6 +23,7 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, "Users/register.html", context={"form": form})
+
 
 @login_required
 def profile(request):
@@ -34,14 +37,22 @@ def profile(request):
             p_form.save()
             return redirect("blog-profile")
     else:
-        s_form = CommentForm(user=request.user)
+        try:
+            current_ip = request.META.get("REMOTE_ADDR")
+            resopnse = requests.get(
+                f"http://api.ipstack.com/{current_ip}?access_key=ce71c62110672c8020ebd49b49d4267e"
+            )
+            location = response.json()["region_name"]
+            s_form = CommentForm(user=request.user, location=location)
+        except Exception as e:
+            s_form = CommentForm(user=request.user)
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-        print(request.META.get("REMOTE_ADDR"),"==========================")
 
     context = {"u_form": u_form, "p_form": p_form, "s_form": s_form}
 
     return render(request, "Users/profile.html", context)
+
 
 @login_required
 def comment(request):
@@ -59,6 +70,7 @@ def comment(request):
         return HttpResponse("<h1>Vapas Bharkar Aao</h1>")
     else:
         return HttpResponse("<h1>Vapas Bharke Aao</h1>")
+
 
 @login_required
 def seeing_dashboard(request):
