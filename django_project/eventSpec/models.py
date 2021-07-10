@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-
+# class MainTable(models.Model):
+    # model = models.Char
 
 class BrightSparkEducation(models.Model):
     task = models.CharField(max_length=50,default="None")

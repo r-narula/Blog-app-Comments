@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content%}
+    <div class="content-section">
+        {% for i in data %}
+        <h1>{{ i.user }} {{ i.total_hours }}</h1>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -9,6 +9,7 @@ from rest_framework.parsers import JSONParser
 from django.contrib.auth import authenticate
 from .models import FormSubmit,UserMetaData
 from django.http import HttpResponse
+from .models import UserMetaData,UserTotalHour
 
 
 def register(request):
@@ -54,8 +55,14 @@ def profile(request):
 
 @login_required
 def seeing_dashboard(request):
-    data = None
-    pass
+    # Users all data.
+    data = UserMetaData.objects.filter()
+    print((data))
+    for present_user in list(data):
+        print(present_user.user,present_user.total_hours)
+    context = {"data":data}
+    return render(request,"Users/dashboard.html",context=context)
+
 
 @csrf_exempt
 def users_list(request):
