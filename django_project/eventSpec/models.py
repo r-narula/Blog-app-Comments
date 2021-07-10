@@ -1,54 +1,15 @@
 from django.db import models
 
-# Create your models here.
 
-# class MainTable(models.Model):
-    # model = models.Char
-
-class BrightSparkEducation(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
+class Event(models.Model):
+    event_name = models.CharField(max_length=255, default="Event none")
+    
+    def __str__(self):
+        return self.event_name
+class Task(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.task
-
-class Transformers(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
-
-    def __str__(self):
-        return self.task
-
-class FoodNutrition(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
-
-    def __str__(self):
-        return self.task
-
-class GenderProgram(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
-
-    def __str__(self):
-        return self.task
-
-class YoungistaanAnimalHeroes(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
-
-    def __str__(self):
-        return self.task
-
-class BloodDonor(models.Model):
-    task = models.CharField(max_length=50,default="None")
-    Estimated_total_hours = models.IntegerField(default=0)
-    locationOfOperation = models.CharField(max_length=50,default="None")
-
-    def __str__(self):
-        return self.task
+        return self.name

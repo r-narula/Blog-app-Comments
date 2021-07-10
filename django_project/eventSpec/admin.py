@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import (BloodDonor,YoungistaanAnimalHeroes,GenderProgram,
-                FoodNutrition,BrightSparkEducation,Transformers)
+from .models import Event,Task
 # Register your models here.
 
-models_list = [BloodDonor,YoungistaanAnimalHeroes,GenderProgram,
-                FoodNutrition,BrightSparkEducation,Transformers]
 
-admin.site.register(models_list)
+admin.site.register(Event)
+admin.site.register(Task)
+
+
 

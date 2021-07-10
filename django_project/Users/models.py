@@ -1,27 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from eventSpec.models import BrightSparkEducation,GenderProgram
+from eventSpec.models import Task,Event
 # Create your models here.
 
 class Profile(models.Model):
     # fields for it
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     image = models.ImageField(default = 'default.jpeg',upload_to='profile_pics')
+    event_chosen = models.ForeignKey(Event,on_delete=models.CASCADE,default=None,blank=True,null=True)
 
     def __str__(self):
         return self.user.username 
 
-# class Task(models.Model):
-#     task = models.CharField(max_length=50,default="None")
-#     Total_hours_done = models.IntegerField(default=0)
-
-#     def __str__(self):
-#         return self.task
-
 class FormSubmit(models.Model):
     user_using = models.ForeignKey(User,on_delete=models.CASCADE)
-    task_choosen = models.ForeignKey(BrightSparkEducation,on_delete=models.CASCADE)
+    task_choosen = models.ForeignKey(Task,on_delete=models.CASCADE)
     hours_spent = models.IntegerField(default=0)
     others = models.CharField(max_length=200,blank=True,default="  ")
     image = models.ImageField(default="default.jpeg",upload_to='profile_pics')
