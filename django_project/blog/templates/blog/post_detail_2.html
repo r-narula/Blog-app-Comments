@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ data.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ data.author }}</a>
+        <small class="text-muted">{{ data.date_posted|date:"F d, Y" }}</small>
+        {% if data.author == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' data.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' data.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ data.title }}</h2>
+      <p class="article-content">{{ data.content }}</p>
+    </div>
+  </article>
+<a href = "{% url 'blog-home' %}">Go Back</a>
+
+<article class="media content-section">
+<form method="post">
+    {%csrf_token %}
+    <H2> Comment Here</H2>
+    {{ form|crispy }}
+    <input type ="submit" value="Comment">
+    <small>Submitting as {{ user }}</small>
+</form>
+</article>
+{%for comment in comments%}
+<article class="media content-section">
+<strong>{{comment.your_name}}:</strong> {{comment.comment}}
+</article>
+{% endfor %}
+
+{% endblock content%}
