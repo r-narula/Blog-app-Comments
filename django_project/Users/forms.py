@@ -48,3 +48,8 @@ class CommentForm(forms.ModelForm):
             self.fields["task_chosen"].queryset = Task.objects.filter(
                 event=user.profile.event_chosen
             )
+
+        ## Changes..
+        # self.fields["task_chosen"].queryset = Task.objects.filter(
+        #         event=user.profile.event_chosen
+        #     )
