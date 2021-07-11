@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background:url();
     color: #333333;
     margin-top: 5rem;
   }
@@ -35,7 +35,7 @@ body {
     border-radius: 3px;
     margin-bottom: 20px;
   }
-  
+
   .article-title {
     color: #444444;
   }
